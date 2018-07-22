@@ -8,7 +8,7 @@ import (
 	gorp "gopkg.in/gorp.v1"
 )
 
-type ReceivedTransaction struct {
+type Transaction struct {
 	ID        int    `db:"id"`
 	TxHash    string `db:"TxHash"`
 	BlockID   int    `db:"BlockID"`
@@ -23,12 +23,14 @@ type ReceivedTransaction struct {
 func main() {
 	dbmap := initDb()
 	defer dbmap.Db.Close()
-	tx1 := &ReceivedTransaction{0, "hoge", 1, "input", "output", 10, "time", "sign", "pubkey"}
+
+	//insert用のテストデータ
+	tx1 := &Transaction{0, "hoge", 1, "input", "output", 10, "time", "sign", "pubkey"}
 	err := dbmap.Insert(tx1)
 	checkErr(err, "Insert failed")
 
-	var transactions []ReceivedTransaction
-	_, err = dbmap.Select(&transactions, "select * from txs order by id")
+	var transactions []Transaction
+	_, err = dbmap.Select(&transactions, "select * from transactions order by id")
 	checkErr(err, "Select failed")
 	log.Println("All rows:")
 	for x, p := range transactions {
@@ -47,7 +49,7 @@ func initDb() *gorp.DbMap {
 
 	// add a table, setting the table name to 'posts' and
 	// specifying that the Id property is an auto incrementing PK
-	dbmap.AddTableWithName(ReceivedTransaction{}, "txs").SetKeys(true, "id")
+	dbmap.AddTableWithName(Transaction{}, "transactions").SetKeys(true, "id")
 
 	// create the table. in a production system you'd generally
 	// use a migration tool, or create the tables via scripts
