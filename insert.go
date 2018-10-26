@@ -83,61 +83,25 @@ func chooseDB(tx Transaction) int {
 func insert(tx Transaction, index int) {
 	dbmap := initDB()
 	if index == 1 {
-		var insert_tx Table1
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
+		var insert_tx Table1 = Table1(tx)
 		fmt.Println(insert_tx)
 		err := dbmap.Insert(&insert_tx)
 		checkErr(err, "Insert failed")
 	}
 	if index == 2 {
-		var insert_tx Table2
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
+		var insert_tx Table2 = Table2(tx)
 		fmt.Println(insert_tx)
 		err := dbmap.Insert(&insert_tx)
 		checkErr(err, "Insert failed")
 	}
 	if index == 3 {
-		var insert_tx Table3
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
+		var insert_tx Table3 = Table3(tx)
 		fmt.Println(insert_tx)
 		err := dbmap.Insert(&insert_tx)
 		checkErr(err, "Insert failed")
 	}
 	if index == 4 {
-		var insert_tx Table4
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
+		var insert_tx Table4 = Table4(tx)
 		fmt.Println(insert_tx)
 		err := dbmap.Insert(&insert_tx)
 		checkErr(err, "Insert failed")
