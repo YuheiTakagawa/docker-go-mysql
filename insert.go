@@ -82,66 +82,29 @@ func chooseDB(tx Transaction) int {
 
 func insert(tx Transaction, index int) {
 	dbmap := initDB()
-	if index == 1 {
-		var insert_tx Table1
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
+	switch index {
+	case 1:
+		insert_tx := Table1(tx)
+		fmt.Println(insert_tx)
+		err := dbmap.Insert(&insert_tx)
+		checkErr(err, "Insert failed")
+	case 2:
+		insert_tx := Table2(tx)
+		fmt.Println(insert_tx)
+		err := dbmap.Insert(&insert_tx)
+		checkErr(err, "Insert failed")
+	case 3:
+		insert_tx := Table3(tx)
+		fmt.Println(insert_tx)
+		err := dbmap.Insert(&insert_tx)
+		checkErr(err, "Insert failed")
+	case 4:
+		insert_tx := Table4(tx)
 		fmt.Println(insert_tx)
 		err := dbmap.Insert(&insert_tx)
 		checkErr(err, "Insert failed")
 	}
-	if index == 2 {
-		var insert_tx Table2
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
-		fmt.Println(insert_tx)
-		err := dbmap.Insert(&insert_tx)
-		checkErr(err, "Insert failed")
-	}
-	if index == 3 {
-		var insert_tx Table3
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
-		fmt.Println(insert_tx)
-		err := dbmap.Insert(&insert_tx)
-		checkErr(err, "Insert failed")
-	}
-	if index == 4 {
-		var insert_tx Table4
-		insert_tx.ID = tx.ID
-		insert_tx.TxHash = tx.TxHash
-		insert_tx.BlockID = tx.BlockID
-		insert_tx.Input = tx.Input
-		insert_tx.Output = tx.Output
-		insert_tx.Amount = tx.Amount
-		insert_tx.Timestamp = tx.Timestamp
-		insert_tx.Sign = tx.Sign
-		insert_tx.Pubkey = tx.Pubkey
-		fmt.Println(insert_tx)
-		err := dbmap.Insert(&insert_tx)
-		checkErr(err, "Insert failed")
-	}
+
 }
 
 type Transaction struct {
@@ -156,53 +119,10 @@ type Transaction struct {
 	Pubkey    string `db:"Pubkey"`
 }
 
-type Table1 struct {
-	ID        int    `db:"id"`
-	TxHash    string `db:"TxHash"`
-	BlockID   int    `db:"BlockID"`
-	Input     string `db:"Input"`
-	Output    string `db:"Output"`
-	Amount    int    `db:"Amount"`
-	Timestamp string `db:"Timestamp"`
-	Sign      string `db:"Sign"`
-	Pubkey    string `db:"Pubkey"`
-}
-
-type Table2 struct {
-	ID        int    `db:"id"`
-	TxHash    string `db:"TxHash"`
-	BlockID   int    `db:"BlockID"`
-	Input     string `db:"Input"`
-	Output    string `db:"Output"`
-	Amount    int    `db:"Amount"`
-	Timestamp string `db:"Timestamp"`
-	Sign      string `db:"Sign"`
-	Pubkey    string `db:"Pubkey"`
-}
-
-type Table3 struct {
-	ID        int    `db:"id"`
-	TxHash    string `db:"TxHash"`
-	BlockID   int    `db:"BlockID"`
-	Input     string `db:"Input"`
-	Output    string `db:"Output"`
-	Amount    int    `db:"Amount"`
-	Timestamp string `db:"Timestamp"`
-	Sign      string `db:"Sign"`
-	Pubkey    string `db:"Pubkey"`
-}
-
-type Table4 struct {
-	ID        int    `db:"id"`
-	TxHash    string `db:"TxHash"`
-	BlockID   int    `db:"BlockID"`
-	Input     string `db:"Input"`
-	Output    string `db:"Output"`
-	Amount    int    `db:"Amount"`
-	Timestamp string `db:"Timestamp"`
-	Sign      string `db:"Sign"`
-	Pubkey    string `db:"Pubkey"`
-}
+type Table1 Transaction
+type Table2 Transaction
+type Table3 Transaction
+type Table4 Transaction
 
 type RingBuffer struct {
 	ID           int    `db:"id"`
